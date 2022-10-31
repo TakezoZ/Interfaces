@@ -19,13 +19,14 @@ namespace ExercicioDeFixacao
             int numberOfInstallments = int.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
 
             Contract contract = new Contract(contractNumber, initialDate, cotractValue);
-            InstallmentService installmentService = new InstallmentService();
 
-            installmentService.ProcessContract(contract, numberOfInstallments);
+            ContractService contractService = new ContractService(new PayPalService());
+            contractService.ProcessContract(contract, numberOfInstallments);
 
-            foreach (var item in contract.Installments)
+            Console.WriteLine("Intallments:");
+            foreach (Installment installment in contract.Installments)
             {
-                Console.WriteLine(item);
+                Console.WriteLine(installment);
             }
         }
     }

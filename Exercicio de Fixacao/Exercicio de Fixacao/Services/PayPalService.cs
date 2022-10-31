@@ -1,15 +1,18 @@
 ﻿namespace Exercicio_de_Fixacao.Services
 {
-    internal class PayPalService : OnlinePaymentService
+    internal class PayPalService : IOnlinePaymentService
     {
-        public double PaymentFee(double amount)
-        {
-            return amount * 0.02;
-        }
+        private const double FeePercentage = 0.02;
+        private const double MonthlyInterest = 0.01;
 
         public double Interest(double amount, int months)
         {
-            return (months * 0.01) * months;
+            return amount * MonthlyInterest * months;
+        }
+
+        public double PaymentFee(double amount)
+        {
+            return amount * FeePercentage;
         }
     }
 }
